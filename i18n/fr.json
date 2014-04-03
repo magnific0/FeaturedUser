@@ -1,0 +1,10 @@
+{
+    "@metadata": {
+        "authors": [
+            "Jack Phoenix <jack@countervandalism.net>"
+        ]
+    },
+    "random-user-points-weekly": "points cette semaine",
+    "random-user-points-monthly": "points points ce mois-ci",
+    "random-user-about-me": "À propos de moi"
+}

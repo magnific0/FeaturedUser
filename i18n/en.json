@@ -1,0 +1,12 @@
+{
+    "@metadata": {
+        "authors": [
+            "Aaron Wright <aaron.wright@gmail.com>",
+            "David Pean <david.pean@gmail.com>"
+        ]
+    },
+    "randomfeatureduser-desc": "Adds <code>&lt;randomfeatureduser&gt;</code> parser hook to display a random featured user along with some data",
+    "random-user-points-weekly": "points this week",
+    "random-user-points-monthly": "points this month",
+    "random-user-about-me": "About Me"
+}

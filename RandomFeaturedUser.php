@@ -13,7 +13,6 @@
  *
  * @file
  * @ingroup Extensions
- * @version 1.1
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
@@ -33,14 +32,15 @@ $wgRandomFeaturedUser['about'] = true;
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'RandomFeaturedUser',
-	'version' => '1.1',
+	'version' => '1.2.0',
 	'author' => array( 'Aaron Wright', 'David Pean', 'Jack Phoenix' ),
-	'description' => 'Adds <tt>&lt;randomfeatureduser&gt;</tt> parser hook to display a random featured user along with some data',
+	'descriptionmsg' => 'randomfeatureduser-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:RandomFeaturedUser',
 );
 
 // Internationalization messages
 $dir = dirname( __FILE__ ) . '/';
+$wgMessagesDirs['RandomFeaturedUser'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['RandomFeaturedUser'] = $dir . 'RandomFeaturedUser.i18n.php';
 
 $wgHooks['ParserFirstCallInit'][] = 'wfRandomFeaturedUser';
