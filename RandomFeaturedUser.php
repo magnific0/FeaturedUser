@@ -138,11 +138,11 @@ function getRandomUser( $input, $args, $parser ) {
 		$avatar = new wAvatar( $random_user['user_id'], 'ml' );
 		$avatarImage = $avatar->getAvatarURL();
 
-		$output .= "<a href=\"{$user_title->escapeFullURL()}\">{$avatarImage}</a>\n";
+		$output .= "<a href=\"" . htmlspecialchars( $user_title->getFullURL() ) . "\">{$avatarImage}</a>\n";
 	}
 
 	$output .= "<div class=\"random-featured-user-title\">
-					<a href=\"{$user_title->escapeFullURL()}\">" .
+					<a href=\"" . htmlspecialchars( $user_title->getFullURL() ) . "\">" .
 					wordwrap( $random_user['user_name'], 12, "<br />\n", true ) .
 					"</a><br /> $points " .
 				wfMsg( "random-user-points-{$period}" ) .
