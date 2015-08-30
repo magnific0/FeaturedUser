@@ -4,7 +4,7 @@
             "Mitchel Corstjens"
         ]
     },
-    "random-user-points-weekly": "punten deze week",
-    "random-user-points-monthly": "punten deze month",
+    "random-user-points-weekly": "{{PLURAL:$1|een punt|$1 punten}} deze week",
+    "random-user-points-monthly": "{{PLURAL:$1|een punt|$1 punten}} deze month",
     "random-user-about-me": "Over mij"
 }

@@ -6,7 +6,7 @@
         ]
     },
     "randomfeatureduser-desc": "Adds <code>&lt;randomfeatureduser&gt;</code> parser hook to display a random featured user along with some data",
-    "random-user-points-weekly": "points this week",
-    "random-user-points-monthly": "points this month",
+    "random-user-points-weekly": "{{PLURAL:$1|one point|$1 points}} this week",
+    "random-user-points-monthly": "{{PLURAL:$1|one point|$1 points}} this month",
     "random-user-about-me": "About Me"
 }
