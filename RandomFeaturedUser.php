@@ -16,13 +16,9 @@
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
- * @link http://www.mediawiki.org/wiki/Extension:RandomFeaturedUser Documentation
+ * @link https://www.mediawiki.org/wiki/Extension:RandomFeaturedUser Documentation
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  */
-
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( 'This is not a valid entry point to MediaWiki.' );
-}
 
 // What to display on the output of <randomfeatureduser> tag...
 $wgRandomFeaturedUser['avatar'] = true;
@@ -32,22 +28,22 @@ $wgRandomFeaturedUser['about'] = true;
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'RandomFeaturedUser',
-	'version' => '1.2.0',
+	'version' => '1.2.1',
 	'author' => array( 'Aaron Wright', 'David Pean', 'Jack Phoenix' ),
 	'descriptionmsg' => 'randomfeatureduser-desc',
 	'url' => 'https://www.mediawiki.org/wiki/Extension:RandomFeaturedUser',
 );
 
 // Internationalization messages
-$dir = dirname( __FILE__ ) . '/';
 $wgMessagesDirs['RandomFeaturedUser'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['RandomFeaturedUser'] = $dir . 'RandomFeaturedUser.i18n.php';
 
 $wgHooks['ParserFirstCallInit'][] = 'wfRandomFeaturedUser';
+
 /**
  * Set up the <randomfeatureduser> tag
- * @param $parser Object: instance of Parser (not necessarily $wgParser)
- * @return Boolean: true
+ *
+ * @param Parser $parser
+ * @return bool
  */
 function wfRandomFeaturedUser( &$parser ) {
 	$parser->setHook( 'randomfeatureduser', 'getRandomUser' );
@@ -57,12 +53,10 @@ function wfRandomFeaturedUser( &$parser ) {
 function getRandomUser( $input, $args, $parser ) {
 	global $wgMemc, $wgRandomFeaturedUser;
 
-	wfProfileIn( __METHOD__ );
-
 	$parser->disableCache();
 
 	$period = ( isset( $args['period'] ) ) ? $args['period'] : '';
-	if( $period != 'weekly' && $period != 'monthly' ) {
+	if ( $period != 'weekly' && $period != 'monthly' ) {
 		return '';
 	}
 
@@ -74,7 +68,7 @@ function getRandomUser( $input, $args, $parser ) {
 	$key = wfMemcKey( 'user_stats', 'top', 'points', 'weekly', $realCount );
 	$data = $wgMemc->get( $key );
 
-	if( $data != '' ) {
+	if ( $data != '' ) {
 		wfDebug( "Got top $period users by points ({$count}) from cache\n" );
 		$user_list = $data;
 	} else {
@@ -92,10 +86,10 @@ function getRandomUser( $input, $args, $parser ) {
 			)
 		);
 		$loop = 0;
-		foreach( $res as $row ) {
+		foreach ( $res as $row ) {
 			// Prevent blocked users from appearing
 			$user = User::newFromId( $row->up_user_id );
-			if( !$user->isBlocked() ) {
+			if ( !$user->isBlocked() ) {
 				$user_list[] = array(
 					'user_id' => $row->up_user_id,
 					'user_name' => $row->up_user_name,
@@ -103,7 +97,7 @@ function getRandomUser( $input, $args, $parser ) {
 				);
 				$loop++;
 			}
-			if( $loop >= 10 ) {
+			if ( $loop >= 10 ) {
 				break;
 			}
 		}
@@ -114,26 +108,26 @@ function getRandomUser( $input, $args, $parser ) {
 	}
 
 	// Make sure we have some data
-	if( !is_array( $user_list ) || count( $user_list ) == 0 ) {
+	if ( !is_array( $user_list ) || count( $user_list ) == 0 ) {
 		return '';
 	}
 
 	$random_user = $user_list[array_rand( $user_list, 1 )];
 
 	// Make sure we have a user
-	if( !$random_user['user_id'] ) {
+	if ( !$random_user['user_id'] ) {
 		return '';
 	}
 
 	$output = '<div class="random-featured-user">';
 
-	if( $wgRandomFeaturedUser['points'] == true ) {
+	if ( $wgRandomFeaturedUser['points'] == true ) {
 		$stats = new UserStats( $random_user['user_id'], $random_user['user_name'] );
 		$stats_data = $stats->getUserStats();
 		$points = $stats_data['points'];
 	}
 
-	if( $wgRandomFeaturedUser['avatar'] == true ) {
+	if ( $wgRandomFeaturedUser['avatar'] == true ) {
 		$user_title = Title::makeTitle( NS_USER, $random_user['user_name'] );
 		$avatar = new wAvatar( $random_user['user_id'], 'ml' );
 		$avatarImage = $avatar->getAvatarURL();
@@ -148,14 +142,14 @@ function getRandomUser( $input, $args, $parser ) {
 				wfMsg( "random-user-points-{$period}" ) .
 			"</div>\n\n";
 
-	if( $wgRandomFeaturedUser['about'] == true ) {
+	if ( $wgRandomFeaturedUser['about'] == true ) {
 		$p = new Parser();
 		$profile = new UserProfile( $random_user['user_name'] );
 		$profile_data = $profile->getProfile();
 		$about = ( isset( $profile_data['about'] ) ) ? $profile_data['about'] : '';
 		// Remove templates
 		$about = preg_replace( '@{{.*?}}@si', '', $about );
-		if( !empty( $about ) ) {
+		if ( !empty( $about ) ) {
 			global $wgTitle, $wgOut;
 			$output .= '<div class="random-featured-user-about-title">' .
 				wfMsg( 'random-user-about-me' ) . '</div>' .
@@ -163,9 +157,7 @@ function getRandomUser( $input, $args, $parser ) {
 		}
 	}
 
-	$output .= '</div><div class="cleared"></div>';
-
-	wfProfileOut( __METHOD__ );
+	$output .= '</div><div class="visualClear"></div>';
 
 	return $output;
 }
