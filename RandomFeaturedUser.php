@@ -40,3 +40,13 @@ $wgMessagesDirs['RandomFeaturedUser'] = __DIR__ . '/i18n';
 $wgAutoloadClasses['RandomFeaturedUser'] = __DIR__ . '/RandomFeaturedUser.class.php';
 
 $wgHooks['ParserFirstCallInit'][] = 'wfRandomFeaturedUser';
+
+/**
+ * Set up the <randomfeatureduser> tag
+ * @param $parser Object: instance of Parser (not necessarily $wgParser)
+ * @return Boolean: true
+ */
+function wfRandomFeaturedUser( &$parser ) {
+        $parser->setHook( 'randomfeatureduser', array( 'RandomFeaturedUser', 'getRandomUser' ) );
+        return true;
+}
