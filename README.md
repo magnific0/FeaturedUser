@@ -1,7 +1,7 @@
 # FeaturedUser
 MediaWiki extension to enhance SocialProfiles. Extension allows to place an user (incl. avatar) and several social profile elements into any article, using the ```<featureduser user="User" bits="bit1,bit2,bit3" />``` tag.
 
-![Demo of two user profiles in table](http://i.imgur.com/sM4yucq.png)
+![Demo of two user profiles in table](http://i.imgur.com/F3uPOJD.png)
 
 ## Installation
 
