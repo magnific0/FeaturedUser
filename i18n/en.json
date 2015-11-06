@@ -5,8 +5,5 @@
 			"David Pean <david.pean@gmail.com>"
 		]
 	},
-	"featureduser-desc": "Adds <code>&lt;featureduser&gt;</code> parser hook to display a featured featured user along with some data",
-	"featured-user-points-weekly": "{{PLURAL:$1|one point|$1 points}} this week",
-	"featured-user-points-monthly": "{{PLURAL:$1|one point|$1 points}} this month",
-	"featured-user-about-me": "About Me"
+	"featureduser-desc": "Adds <code>&lt;featureduser&gt;</code> parser hook to display a random featured user along with some data"
 }

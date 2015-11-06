@@ -3,8 +3,5 @@
         "authors": [
             "Mitchel Corstjens"
         ]
-    },
-    "featured-user-points-weekly": "{{PLURAL:$1|een punt|$1 punten}} deze week",
-    "featured-user-points-monthly": "{{PLURAL:$1|een punt|$1 punten}} deze month",
-    "featured-user-about-me": "Over mij"
+    }
 }

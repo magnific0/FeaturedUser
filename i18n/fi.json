@@ -3,8 +3,5 @@
         "authors": [
             "Jack Phoenix <jack@countervandalism.net>"
         ]
-    },
-    "featured-user-points-weekly": "{{PLURAL:$1|yksi piste|$1 pistettä}} tällä viikolla",
-    "featured-user-points-monthly": "{{PLURAL:$1|yksi piste|$1 pistettä}} tässä kuussa",
-    "featured-user-about-me": "Tietoja minusta"
+    }
 }
