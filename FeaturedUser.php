@@ -33,7 +33,7 @@ $wgFeaturedUserBits['occupation']   = 'user-personal-info-occupation';
 $wgFeaturedUserBits['websites']     = 'user-personal-info-websites';
 $wgFeaturedUserBits['places_lived'] = 'user-personal-info-places_lived';
 $wgFeaturedUserBits['schools']      = 'user-personal-info-schools';
-$wgFeaturedUserBits['about']        = 'user-personal-info-about';
+$wgFeaturedUserBits['about']        = 'user-personal-info-about-me';
 $wgFeaturedUserBits['location']     = 'user-personal-info-location';
 $wgFeaturedUserBits['hometown']     = 'user-personal-info-hometown';
 
