@@ -89,7 +89,50 @@ class FeaturedUser {
 
 			$label = wfMessage($wgFeaturedUserBits[$bit])->text();
 
-			$text  = ( isset( $profile_data[$bit] ) ) ? $profile_data[$bit] : '';
+			if ($bit == 'location'){
+				$defaultCountry = wfMessage( 'user-profile-default-country' )->inContentLanguage()->text();
+				$text = $profile_data['location_city'] . ', ' . $profile_data['location_state'];
+				if ( $profile_data['location_country'] != $defaultCountry ) {
+                        		if ( $profile_data['location_city'] && $profile_data['location_state'] ) { // city AND state
+                                		$text = $profile_data['location_city'] . ', ' .
+                                                $profile_data['location_state'] . ', ' .
+                                                $profile_data['location_country'];
+                        		} elseif ( $profile_data['location_city'] && !$profile_data['location_state'] ) { // city, but no state
+                                		$text = $profile_data['location_city'] . ', ' . $profile_data['location_country'];
+                    		    	} elseif ( $profile_data['location_state'] && !$profile_data['location_city'] ) { // state, but no city
+          		                	$text = $profile_data['location_state'] . ', ' . $profile_data['location_country'];
+                		        } else {
+ 		                        	$text = '';
+                                		$text .= $profile_data['location_country'];
+                        		}
+                		}
+
+		                if ( $text == ', ' ) {
+                		        $text = '';
+		                }
+			} elseif ( $bit == 'hometown' ) {
+				$defaultCountry = wfMessage( 'user-profile-default-country' )->inContentLanguage()->text();
+		               	$text = $profile_data['hometown_city'] . ', ' . $profile_data['hometown_state'];
+                		if ( $profile_data['hometown_country'] != $defaultCountry ) {
+                        		if ( $profile_data['hometown_city'] && $profile_data['hometown_state'] ) { // city AND state
+                                		$text = $profile_data['hometown_city'] . ', ' .
+                                                        $profile_data['hometown_state'] . ', ' .
+                                                        $profile_data['hometown_country'];
+                        		} elseif ( $profile_data['hometown_city'] && !$profile_data['hometown_state'] ) { // city, but no state
+                                		$text = $profile_data['hometown_city'] . ', ' . $profile_data['hometown_country'];
+                        		} elseif ( $profile_data['hometown_state'] && !$profile_data['hometown_city'] ) { // state, but no city
+                                		$text = $profile_data['hometown_state'] . ', ' . $profile_data['hometown_country'];
+                        		} else {
+                                		$text = '';
+                                		$text .= $profile_data['hometown_country'];
+                        		}
+                		}
+				if ( $text == ', ' ) {
+                       			$text = '';
+                		}
+			} else {
+				$text  = ( isset( $profile_data[$bit] ) ) ? $profile_data[$bit] : '';
+			}
 
 			// Remove templates
 			$text  = preg_replace( '@{{.*?}}@si', '', $text );
